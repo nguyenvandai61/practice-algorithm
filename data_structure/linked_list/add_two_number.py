@@ -49,8 +49,35 @@ class Solution:
             nt = ListNode(digits[i], nt)
         self.print_list(nt)
         return nt    
+    def add_two_numbers2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        n1 = l1
+        n2 = l2
+        is_remembered = False
+        nt = None
+        res = []
+        while n1 or n2:
+            a = n1.val if n1 else 0
+            b = n2.val if n2 else 0
+            n1 = n1.next if n1 else None
+            n2 = n2.next if n2 else None
+            r = a+b
+                
+            if is_remembered:
+                r += 1
+                is_remembered = False
+            if r > 9:
+                r = r%10
+                is_remembered = True
+            
+            res.append(r)
         
-        # print all values
+        if is_remembered:
+            res.append(1)
+        print('reverse:', res[::-1])
+        for i in res[::-1]:
+            nt = ListNode(i, nt)
+        return nt
+
     def print_list(self, l: Optional[ListNode]):
         print('[', end='')
         while l:
@@ -61,12 +88,12 @@ class Solution:
     def test(self):
         l1 = ListNode(2, ListNode(4, ListNode(3)))
         l2 = ListNode(5, ListNode(6, ListNode(4)))
-        self.print_list(self.add_two_numbers(l1, l2))
+        self.print_list(self.add_two_numbers2(l1, l2))
     
     def test2(self):
-        l1 = ListNode(0)
-        l2 = ListNode(0)
-        self.print_list(self.add_two_numbers(l1, l2))
+        l1 = ListNode(9, ListNode(9, ListNode(9, ListNode(9))))
+        l2 = ListNode(9, ListNode(9, ListNode(9)))
+        self.print_list(self.add_two_numbers2(l1, l2))
         
 if __name__ == "__main__":
     s = Solution()
