@@ -51,26 +51,23 @@ class Solution:
         p = p2
         r = head
         d = { r: p }
-        while r:
-            print('id(r)', id(r))
-            p.next = Node(r.val)
+        while r.next:
+            p.next = Node(r.next.val)
             r = r.next
             p = p.next
             d[r] = p
         
+        self.print_list(p2)
         r = head
         p = p2
         while r:
-            print(id(r), end=' ')
             if r.random:
                 p.random = d[r.random]
             r = r.next
             p = p.next
-            
-        print(p.val)
-        print('id p', id(p))
-        print('id p2', id(p2))
         self.print_list(p2)
+        return p2
+        
 
 
    
@@ -78,11 +75,9 @@ class Solution:
         p = head
         print('------------------------')
         while p:
-            print(id(p), end=' ')
             print(f'val{p.val}', end='-')
-            print(f'nextVal{p.next.val if p.next else "None"}', end='-')
-            print(id(p.random) if p.random else None, end='    ')
-            print()
+            print(f'n{p.next.val if p.next else "None"}', end='-')
+            print(f'r{p.random.val if p.random else "None"}')
             p = p.next
         print()
         
