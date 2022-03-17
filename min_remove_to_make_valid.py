@@ -1,17 +1,21 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
         stack=[]
-        for i in range(len(s)):
-            if s[i]=="(":
-                stack.append(i)
-            elif s[i]==")":
+        i = 0
+        s = list(s)
+        print(s)
+        while i < len(s):
+            if s[i] == ')':
                 if stack:
                     stack.pop()
                 else:
-                    s=s[:i]+s[i+1:]
+                    s[i] = ''
+            elif s[i] == '(':
+                stack.append(i)
+            i += 1
         for i in stack:
-            s=s[:i]+s[i+1:]
-        return s
+            s[i] = ''
+        return ''.join(s)
         
 if __name__ == "__main__":
     s = Solution()
